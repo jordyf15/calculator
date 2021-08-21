@@ -1,3 +1,9 @@
+const display = document.querySelector('#display');
+let displayValue="";
+let firstValue;
+let secondValue;
+display.textContent= displayValue;
+
 function add(aNum, bNum){
     return aNum+bNum;
 }
@@ -26,3 +32,13 @@ function operate(operator, aNum, bNum){
             return divide(aNum, bNum);    
     }
 }
+
+function populateDisplay(){
+    displayValue+=this.value;
+    display.textContent= displayValue;
+}
+
+const operandButtons = document.querySelectorAll('.operand');
+operandButtons.forEach(button=>{
+    button.addEventListener('click',populateDisplay);
+})
