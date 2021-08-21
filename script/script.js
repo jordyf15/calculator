@@ -3,7 +3,10 @@ let displayValue="";
 display.textContent= displayValue;
 
 function checkLongDecimal(value){
-    return value.toString().split('.')[1].length>6;
+    if(value.toString().includes('.')){
+        return value.toString().split('.')[1].length>6;
+    }
+    return false;
 }
 
 const operation = {
@@ -49,15 +52,17 @@ function saveOperation(){
 }
 
 function operate(operator, aNum, bNum){
+    const firstNum = parseFloat(aNum);
+    const secondNum = parseFloat(bNum);
     switch(operator){
         case '+':
-            return add(parseInt(aNum), parseInt(bNum));
+            return add(firstNum, secondNum);
         case '-':
-            return subtract(parseInt(aNum), parseInt(bNum));
+            return subtract(firstNum, secondNum);
         case '*':
-            return multiply(parseInt(aNum), parseInt(bNum));
+            return multiply(firstNum, secondNum);
         case '/':
-            return divide(parseInt(aNum), parseInt(bNum));
+            return divide(firstNum, secondNum);
     }
 }
 
