@@ -2,6 +2,10 @@ const display = document.querySelector('#display');
 let displayValue="";
 display.textContent= displayValue;
 
+function checkLongDecimal(value){
+    return value.toString().split('.')[1].length>6;
+}
+
 const operation = {
     calculatedValue: null,
     lastOperation: null,
@@ -11,8 +15,12 @@ const operation = {
         }else{
             console.log(this.calculatedValue, value);
             console.log(operate(this.lastOperation, this.calculatedValue, value));
-            this.calculatedValue= operate(this.lastOperation, this.calculatedValue, value);       
-            display.textContent=this.calculatedValue;
+            this.calculatedValue= operate(this.lastOperation, this.calculatedValue, value);  
+            if(checkLongDecimal(this.calculatedValue)){
+                display.textContent= this.calculatedValue.toFixed(6);
+            }else{
+                display.textContent=this.calculatedValue;
+            }            
         }
         this.lastOperation=operation;
     },
@@ -55,7 +63,11 @@ function operate(operator, aNum, bNum){
 
 function equal(){
     displayValue = operate(operation.lastOperation, operation.calculatedValue, displayValue);
-    display.textContent=displayValue;
+    if(checkLongDecimal(displayValue)){
+        display.textContent = displayValue.toFixed(6);
+    }else {
+        display.textContent=displayValue;
+    }
     operation.calculatedValue = null;
 }
 
