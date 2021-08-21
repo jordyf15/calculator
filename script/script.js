@@ -64,6 +64,13 @@ function populateDisplay(){
     display.textContent= displayValue;
 }
 
+function clear(){
+    displayValue="";
+    display.textContent= displayValue;
+    operation.calculatedValue=null;
+    operation.lastOperation=null;
+}
+
 const operandButtons = document.querySelectorAll('.operand');
 operandButtons.forEach(button=>{
     button.addEventListener('click',populateDisplay);
@@ -76,3 +83,6 @@ operatorButtons.forEach(button=>{
 
 const equalButton = document.querySelector('#equals');
 equalButton.addEventListener('click', equal);
+
+const clearButton = document.querySelector('#clear');
+clearButton.addEventListener('click',clear);
