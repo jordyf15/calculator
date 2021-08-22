@@ -2,8 +2,16 @@ const display = document.querySelector('#display');
 let displayValue="";
 display.textContent= displayValue;
 
-const operationButtons = document.querySelectorAll('.operator');
-    operationButtons.forEach(button=>button.disabled = true);
+function setDisableElement(selector, disabled, multiple){
+    if(multiple){
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element=>element.disabled=disabled);
+    }else{
+        const element = document.querySelector(selector);
+        element.disabled=disabled;
+    }
+}
+setDisableElement('.operator', true, true);
 
 function checkLongDecimal(value){
     if(value.toString().includes('.')){
@@ -29,8 +37,6 @@ const operation = {
                 displayValue="";
                 return;
             }
-            // console.log(this.calculatedValue, value);
-            // console.log(operate(this.lastOperation, this.calculatedValue, value));
             this.calculatedValue= operate(this.lastOperation, this.calculatedValue, value);  
             if(checkLongDecimal(this.calculatedValue)){
                 display.textContent= this.calculatedValue.toFixed(6);
@@ -59,13 +65,9 @@ function divide(aNum, bNum){
 }
 
 function saveOperation(){
-    console.log(this);
-    const operationButtons = document.querySelectorAll('.operator');
-    operationButtons.forEach(button=>button.disabled = true);
-    const decimalButton = document.querySelector('#decimal');
-    decimalButton.disabled=false;
-    const backspaceButton = document.querySelector('#backspace');
-    backspaceButton.disabled=true;
+    setDisableElement('.operator', true, true);
+    setDisableElement('#decimal', false, false);
+    setDisableElement('#backspace', true, false);
     operation.save(displayValue, this.value);
     displayValue='';
 }
@@ -106,7 +108,6 @@ function equal(){
 }
 
 function populateDisplay(){
-    // console.log(displayValue, this.value);
     if(operation.justEqual){
         displayValue='';
         operation.justEqual=false;
@@ -126,11 +127,9 @@ function populateDisplay(){
     displayValue+=this.value;
     display.textContent= displayValue;
     if(this.value!=='.'){
-        const operationButtons = document.querySelectorAll('.operator');
-        operationButtons.forEach(button=>button.disabled = false);
+        setDisableElement('.operator', false, true);
     }
-    const backspaceButton = document.querySelector('#backspace');
-    backspaceButton.disabled=false;
+    setDisableElement('#backspace', false, false);
 }
 
 function clear(){
@@ -138,16 +137,13 @@ function clear(){
     display.textContent= displayValue;
     operation.calculatedValue=null;
     operation.lastOperation=null;
-    const operationButtons = document.querySelectorAll('.operator');
-    operationButtons.forEach(button=>button.disabled = true);
-    const decimalButton = document.querySelector('#decimal');
-    decimalButton.disabled=false;
+    setDisableElement('.operator', true, true);
+    setDisableElement('#decimal', false, false);
 }
 
 function backSpace(){
     if(displayValue.length===1){
-        const operationButtons = document.querySelectorAll('.operator');
-        operationButtons.forEach(button=>button.disabled = true);
+        setDisableElement('.operator', true, true);
     }
     displayValue = displayValue.slice(0,displayValue.length-1);
     display.textContent = displayValue;
