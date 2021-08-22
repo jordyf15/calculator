@@ -4,39 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/main.css">
     <title>Calculator</title>
 </head>
 <body>
-    <header>Calculator</header>
+    <header><h1>Calculator</h1></header>
     <main>
         <div>
-            <p id="display"></p>
+            <div id="calculator">
+                <div id="display-container">
+                    <p id="display"></p>
+                </div>
+                <div id="button-container">
+                    <button data-key="Enter" id="clear">AC</button>
+                    <button data-key="Backspace" id="backspace">&lt;</button>
+                    <button data-key="/" class="operator" value="/">/</button>
+                    <button data-key="7" class="operand" value="7">7</button>
+                    <button data-key="8" class="operand" value="8">8</button>
+                    <button data-key="9" class="operand" value="9">9</button>
+                    <button data-key="*" class="operator" value="*">*</button>
+                    <button data-key="4" class="operand" value="4">4</button>
+                    <button data-key="5" class="operand" value="5">5</button>
+                    <button data-key="6" class="operand" value="6">6</button>
+                    <button data-key="-" class="operator" value="-">-</button>
+                    <button data-key="1" class="operand" value="1">1</button>
+                    <button data-key="2" class="operand" value="2">2</button>
+                    <button data-key="3" class="operand" value="3">3</button>
+                    <button data-key="+" class="operator" value="+">+</button>
+                    <button data-key="0" class="operand" value="0">0</button>
+                    <button data-key="." class="operand" id="decimal" value=".">.</button>
+                    <button data-key="=" id="equals">=</button>
+                </div>
+            </div>
+            <p id="alert"></p>
         </div>
-        <div>
-            <button data-key="1" class="operand" value="1">1</button>
-            <button data-key="2" class="operand" value="2">2</button>
-            <button data-key="3" class="operand" value="3">3</button>
-            <button data-key="4" class="operand" value="4">4</button>
-            <button data-key="5" class="operand" value="5">5</button>
-            <button data-key="6" class="operand" value="6">6</button>
-            <button data-key="7" class="operand" value="7">7</button>
-            <button data-key="8" class="operand" value="8">8</button>
-            <button data-key="9" class="operand" value="9">9</button>
-            <button data-key="0" class="operand" value="0">0</button>
-            <button data-key="." class="operand" id="decimal" value=".">.</button>
-        </div>
-        <div>
-            <button data-key="+" class="operator" value="+">+</button>
-            <button data-key="-" class="operator" value="-">-</button>
-            <button data-key="*" class="operator" value="*">*</button>
-            <button data-key="/" class="operator" value="/">/</button>
-            <button data-key="Backspace" id="backspace">&lt;</button>
-            <button data-key="=" id="equals">=</button>
-            <button data-key="Enter" id="clear">AC</button>
-        </div>
-        <p id="alert"></p>
+        
     </main>
-    <footer></footer>
+    <footer>Copyright © 2021 <a href="https://github.com/jordyf15/calculator">jordyf15 <i class="fab fa-github"></i></a></footer>
     <script src="./script/script.js"></script>
 </body>
 </html>
