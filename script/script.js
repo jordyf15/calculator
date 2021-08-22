@@ -60,6 +60,8 @@ function saveOperation(){
     operationButtons.forEach(button=>button.disabled = true);
     const decimalButton = document.querySelector('#decimal');
     decimalButton.disabled=false;
+    const backspaceButton = document.querySelector('#backspace');
+    backspaceButton.disabled=true;
     operation.save(displayValue, this.value);
     displayValue='';
 }
@@ -99,7 +101,7 @@ function equal(){
 }
 
 function populateDisplay(){
-    console.log(displayValue, this.value);
+    // console.log(displayValue, this.value);
     if(this.value==='.'){
         const decimalButton = document.querySelector('#decimal');
         decimalButton.disabled=true;
@@ -118,6 +120,8 @@ function populateDisplay(){
         const operationButtons = document.querySelectorAll('.operator');
         operationButtons.forEach(button=>button.disabled = false);
     }
+    const backspaceButton = document.querySelector('#backspace');
+    backspaceButton.disabled=false;
 }
 
 function clear(){
@@ -129,6 +133,15 @@ function clear(){
     operationButtons.forEach(button=>button.disabled = false);
     const decimalButton = document.querySelector('#decimal');
     decimalButton.disabled=false;
+}
+
+function backSpace(){
+    if(displayValue.length===1){
+        const operationButtons = document.querySelectorAll('.operator');
+        operationButtons.forEach(button=>button.disabled = true);
+    }
+    displayValue = displayValue.slice(0,displayValue.length-1);
+    display.textContent = displayValue;
 }
 
 const operandButtons = document.querySelectorAll('.operand');
@@ -146,3 +159,6 @@ equalButton.addEventListener('click', equal);
 
 const clearButton = document.querySelector('#clear');
 clearButton.addEventListener('click',clear);
+
+const backspaceButton = document.querySelector('#backspace');
+backspaceButton.addEventListener('click', backSpace);
