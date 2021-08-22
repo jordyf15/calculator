@@ -13,6 +13,9 @@ const operation = {
     calculatedValue: null,
     lastOperation: null,
     save(value, operation){
+        if(displayValue===""){//means they input operator after an operator without an operand
+            return;
+        }
         if(!this.calculatedValue){
             this.calculatedValue=value;
         }else{
@@ -22,8 +25,8 @@ const operation = {
                 displayValue="";
                 return;
             }
-            console.log(this.calculatedValue, value);
-            console.log(operate(this.lastOperation, this.calculatedValue, value));
+            // console.log(this.calculatedValue, value);
+            // console.log(operate(this.lastOperation, this.calculatedValue, value));
             this.calculatedValue= operate(this.lastOperation, this.calculatedValue, value);  
             if(checkLongDecimal(this.calculatedValue)){
                 display.textContent= this.calculatedValue.toFixed(6);
@@ -53,6 +56,8 @@ function divide(aNum, bNum){
 
 function saveOperation(){
     console.log(this);
+    const operationButtons = document.querySelectorAll('.operator');
+    operationButtons.forEach(button=>button.disabled = true);
     operation.save(displayValue, this.value);
     displayValue='';
 }
@@ -96,6 +101,8 @@ function populateDisplay(){
     alert.textContent='';
     displayValue+=this.value;
     display.textContent= displayValue;
+    const operationButtons = document.querySelectorAll('.operator');
+    operationButtons.forEach(button=>button.disabled = false);
 }
 
 function clear(){
