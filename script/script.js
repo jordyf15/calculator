@@ -79,6 +79,9 @@ function equal(){
         displayValue="";
         return;
     }
+    if(!operation.lastOperation || !operation.calculatedValue || !displayValue){
+        return;
+    }
     displayValue = operate(operation.lastOperation, operation.calculatedValue, displayValue);
     if(checkLongDecimal(displayValue)){
         display.textContent = displayValue.toFixed(6);
