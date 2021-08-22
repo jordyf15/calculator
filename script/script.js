@@ -16,6 +16,12 @@ const operation = {
         if(!this.calculatedValue){
             this.calculatedValue=value;
         }else{
+            if(this.lastOperation==='/' && value ==='0'){
+                const alert = document.querySelector('#alert');
+                alert.textContent="Cannot divide with 0 please input another value than the last operation after / or equal";
+                displayValue="";
+                return;
+            }
             console.log(this.calculatedValue, value);
             console.log(operate(this.lastOperation, this.calculatedValue, value));
             this.calculatedValue= operate(this.lastOperation, this.calculatedValue, value);  
@@ -67,6 +73,12 @@ function operate(operator, aNum, bNum){
 }
 
 function equal(){
+    if(operation.lastOperation==='/' && displayValue ==='0'){
+        const alert = document.querySelector('#alert');
+        alert.textContent="Cannot divide with 0 please input another value than the last operation after / or equal";
+        displayValue="";
+        return;
+    }
     displayValue = operate(operation.lastOperation, operation.calculatedValue, displayValue);
     if(checkLongDecimal(displayValue)){
         display.textContent = displayValue.toFixed(6);
@@ -77,6 +89,8 @@ function equal(){
 }
 
 function populateDisplay(){
+    const alert = document.querySelector('#alert');
+    alert.textContent='';
     displayValue+=this.value;
     display.textContent= displayValue;
 }
