@@ -2,10 +2,8 @@ const display = document.querySelector('#display');
 let displayValue="";
 display.textContent= displayValue;
 
-//operator di awal
 const operationButtons = document.querySelectorAll('.operator');
     operationButtons.forEach(button=>button.disabled = true);
-//operand abis equal
 
 function checkLongDecimal(value){
     if(value.toString().includes('.')){
@@ -155,6 +153,13 @@ function backSpace(){
     display.textContent = displayValue;
 }
 
+function keyboardSupport(e){
+    const element = document.querySelector(`button[data-key="${e.key}"`);
+    if(element && !element.disabled){
+        element.click();
+    }
+}
+
 const operandButtons = document.querySelectorAll('.operand');
 operandButtons.forEach(button=>{
     button.addEventListener('click',populateDisplay);
@@ -173,3 +178,5 @@ clearButton.addEventListener('click',clear);
 
 const backspaceButton = document.querySelector('#backspace');
 backspaceButton.addEventListener('click', backSpace);
+
+window.addEventListener('keydown', keyboardSupport)
