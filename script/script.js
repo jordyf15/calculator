@@ -58,6 +58,8 @@ function saveOperation(){
     console.log(this);
     const operationButtons = document.querySelectorAll('.operator');
     operationButtons.forEach(button=>button.disabled = true);
+    const decimalButton = document.querySelector('#decimal');
+    decimalButton.disabled=false;
     operation.save(displayValue, this.value);
     displayValue='';
 }
@@ -97,12 +99,25 @@ function equal(){
 }
 
 function populateDisplay(){
+    console.log(displayValue, this.value);
+    if(this.value==='.'){
+        const decimalButton = document.querySelector('#decimal');
+        decimalButton.disabled=true;
+        if(!displayValue){
+            displayValue='0';
+        }
+    }
+    if(displayValue.includes('.') && this.value==='.') {
+        return;
+    }
     const alert = document.querySelector('#alert');
     alert.textContent='';
     displayValue+=this.value;
     display.textContent= displayValue;
-    const operationButtons = document.querySelectorAll('.operator');
-    operationButtons.forEach(button=>button.disabled = false);
+    if(this.value!=='.'){
+        const operationButtons = document.querySelectorAll('.operator');
+        operationButtons.forEach(button=>button.disabled = false);
+    }
 }
 
 function clear(){
@@ -110,6 +125,10 @@ function clear(){
     display.textContent= displayValue;
     operation.calculatedValue=null;
     operation.lastOperation=null;
+    const operationButtons = document.querySelectorAll('.operator');
+    operationButtons.forEach(button=>button.disabled = false);
+    const decimalButton = document.querySelector('#decimal');
+    decimalButton.disabled=false;
 }
 
 const operandButtons = document.querySelectorAll('.operand');
