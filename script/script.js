@@ -134,6 +134,8 @@ function populateDisplay(){
 
 function clear(){
     displayValue="";
+    const alert = document.querySelector('#alert');
+    alert.textContent='';
     display.textContent= displayValue;
     operation.calculatedValue=null;
     operation.lastOperation=null;
