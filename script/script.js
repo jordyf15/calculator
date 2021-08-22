@@ -2,6 +2,11 @@ const display = document.querySelector('#display');
 let displayValue="";
 display.textContent= displayValue;
 
+//operator di awal
+const operationButtons = document.querySelectorAll('.operator');
+    operationButtons.forEach(button=>button.disabled = true);
+//operand abis equal
+
 function checkLongDecimal(value){
     if(value.toString().includes('.')){
         return value.toString().split('.')[1].length>6;
@@ -12,6 +17,7 @@ function checkLongDecimal(value){
 const operation = {
     calculatedValue: null,
     lastOperation: null,
+    justEqual: false,//after equal if user input operand it should overwrite it
     save(value, operation){
         if(displayValue===""){//means they input operator after an operator without an operand
             return;
@@ -97,11 +103,16 @@ function equal(){
     }else {
         display.textContent=displayValue;
     }
-    operation.calculatedValue = null;
+    operation.calculatedValue = "";
+    operation.justEqual=true;
 }
 
 function populateDisplay(){
     // console.log(displayValue, this.value);
+    if(operation.justEqual){
+        displayValue='';
+        operation.justEqual=false;
+    }
     if(this.value==='.'){
         const decimalButton = document.querySelector('#decimal');
         decimalButton.disabled=true;
@@ -109,7 +120,7 @@ function populateDisplay(){
             displayValue='0';
         }
     }
-    if(displayValue.includes('.') && this.value==='.') {
+    if(displayValue.toString().includes('.') && this.value==='.') {
         return;
     }
     const alert = document.querySelector('#alert');
@@ -130,7 +141,7 @@ function clear(){
     operation.calculatedValue=null;
     operation.lastOperation=null;
     const operationButtons = document.querySelectorAll('.operator');
-    operationButtons.forEach(button=>button.disabled = false);
+    operationButtons.forEach(button=>button.disabled = true);
     const decimalButton = document.querySelector('#decimal');
     decimalButton.disabled=false;
 }
